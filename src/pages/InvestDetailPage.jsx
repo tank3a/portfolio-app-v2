@@ -29,7 +29,7 @@ export default function InvestDetailPage({ data, updateData }) {
     return data.investment?.[year]?.[String(m)] || {}
   }, [data, year, m])
 
-  const topCats = data.investTopCategories || []
+  const topCats = Object.keys(im)
 
   function setItemAmount(topCat, subCat, itemName, amount) {
     updateData(prev => {
@@ -109,7 +109,7 @@ export default function InvestDetailPage({ data, updateData }) {
   }
 
   function getCatTotal(topCat) {
-    const subCats = data.investSubCategories?.[topCat] || []
+    const subCats = Object.keys(im?.[topCat] || {})
     let total = 0
     for (const sub of subCats) {
       for (const item of (im?.[topCat]?.[sub] || [])) total += (item.amount || 0)
@@ -135,7 +135,7 @@ export default function InvestDetailPage({ data, updateData }) {
       )}
 
       {topCats.map(topCat => {
-        const subCats = data.investSubCategories?.[topCat] || []
+        const subCats = Object.keys(im[topCat] || {})
         const catTotal = getCatTotal(topCat)
         const isStock = topCat === '주식'
 
