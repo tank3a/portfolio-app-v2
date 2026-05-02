@@ -17,12 +17,12 @@ export function getTotalExpenses(budgetMonth) {
 export function getInvestmentChange(data, year, month) {
   const investMonth = data?.investment?.[year]?.[String(month)]
   if (!investMonth) return 0
-  const stockCats = (data.investSubCategories?.['주식'] || [])
   let total = 0
-  for (const sub of stockCats) {
-    const items = investMonth['주식']?.[sub] || []
-    for (const item of items) {
-      total += (item.deposit || 0)
+  for (const topCat of Object.keys(investMonth)) {
+    for (const subCat of Object.keys(investMonth[topCat] || {})) {
+      for (const item of (investMonth[topCat][subCat] || [])) {
+        total += (item.deposit || 0)
+      }
     }
   }
   return -total

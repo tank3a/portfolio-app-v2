@@ -66,14 +66,13 @@ export default function InvestDetailPage({ data, updateData }) {
       window.alert(`"${name.trim()}" 항목이 이미 존재합니다.`)
       return
     }
-    const isStock = topCat === '주식'
     updateData(prev => {
       const d = JSON.parse(JSON.stringify(prev))
       const ensured = d.investment?.[year]?.[String(m)] ? d : ensureInvestMonth(d, year, m)
       const im = ensured.investment[year][String(m)]
       if (!im[topCat]) im[topCat] = {}
       if (!im[topCat][subCat]) im[topCat][subCat] = []
-      im[topCat][subCat].push(isStock ? { name: name.trim(), amount: 0, deposit: 0 } : { name: name.trim(), amount: 0 })
+      im[topCat][subCat].push({ name: name.trim(), amount: 0, deposit: 0 })
       return ensured
     })
   }
@@ -149,7 +148,6 @@ export default function InvestDetailPage({ data, updateData }) {
       {topCats.map(topCat => {
         const subCats = Object.keys(im[topCat] || {})
         const catTotal = getCatTotal(topCat)
-        const isStock = topCat === '주식'
 
         return (
           <div key={topCat} className="top-category-section">
@@ -186,8 +184,8 @@ export default function InvestDetailPage({ data, updateData }) {
                     </div>
 
                     {items.map(item => {
-                      const prevAmt = isStock ? getPrevAmount(topCat, subCat, item.name) : null
-                      const change = isStock && prevAmt !== null
+                      const prevAmt = getPrevAmount(topCat, subCat, item.name)
+                      const change = prevAmt !== null
                         ? item.amount - prevAmt - (item.deposit || 0)
                         : null
 
@@ -214,22 +212,20 @@ export default function InvestDetailPage({ data, updateData }) {
                               onChange={val => setItemAmount(topCat, subCat, item.name, val)}
                             />
                           </div>
-                          {isStock && (
-                            <div className="stock-extras">
-                              <label>입금/인출:</label>
-                              <AmountInput
-                                className="amount-input small"
-                                value={item.deposit || 0}
-                                unit={unit}
-                                onChange={val => setItemDeposit(topCat, subCat, item.name, val)}
-                              />
-                              {change !== null && (
-                                <span className={`change-badge${change >= 0 ? ' pos' : ' neg'}`}>
-                                  {change >= 0 ? '+' : ''}{formatAmount(change, unit)}{unit}
-                                </span>
-                              )}
-                            </div>
-                          )}
+                          <div className="stock-extras">
+                            <label>입금/인출:</label>
+                            <AmountInput
+                              className="amount-input small"
+                              value={item.deposit || 0}
+                              unit={unit}
+                              onChange={val => setItemDeposit(topCat, subCat, item.name, val)}
+                            />
+                            {change !== null && (
+                              <span className={`change-badge${change >= 0 ? ' pos' : ' neg'}`}>
+                                {change >= 0 ? '+' : ''}{formatAmount(change, unit)}{unit}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       )
                     })}
