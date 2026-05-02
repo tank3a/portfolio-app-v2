@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>자산 관리</title>
+    <script>
+      // Restore path encoded by 404.html redirect
+      (function () {
+        var p = window.location.search.match(/[?&]p=([^&]+)/);
+        if (p) {
+          window.history.replaceState(
+            null, null,
+            '/' + decodeURIComponent(p[1]) + window.location.hash
+          );
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
