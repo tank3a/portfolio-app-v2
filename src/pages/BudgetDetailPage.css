@@ -1,0 +1,225 @@
+.budget-detail-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.detail-header h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.edit-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+  background: white;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.edit-btn.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.detail-summary {
+  display: flex;
+  gap: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.detail-summary .income { color: var(--color-income); }
+.detail-summary .expense { color: var(--color-expense); }
+
+.detail-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.detail-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.col-title {
+  font-size: 16px;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+
+.income-col .col-title { border-color: var(--color-income); }
+.expense-col .col-title { border-color: var(--color-expense); }
+
+.income-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.income-item,
+.expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.income-item:last-of-type,
+.expense-item:last-of-type {
+  border-bottom: none;
+}
+
+.item-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.amount-input {
+  width: 120px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  color: var(--text);
+  background: white;
+}
+
+.amount-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.section-total {
+  text-align: right;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.col-total {
+  text-align: right;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.col-total.income { background: #f0fdf4; color: var(--color-income); }
+.col-total.expense { background: #fef2f2; color: var(--color-expense); }
+
+.add-btn {
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--color-primary);
+  background: white;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.del-btn {
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--color-expense);
+  background: white;
+  color: var(--color-expense);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.add-category-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px dashed var(--color-expense);
+  background: white;
+  color: var(--color-expense);
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.expense-category-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cat-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cat-total {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-expense);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}

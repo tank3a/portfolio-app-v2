@@ -1,0 +1,222 @@
+.main-page {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.main-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.asset-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.asset-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.asset-card.total-assets { border-top: 4px solid var(--color-primary); }
+.asset-card.total-debt { border-top: 4px solid var(--color-expense); }
+.asset-card.net-assets { border-top: 4px solid var(--color-income); }
+
+.asset-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.asset-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.asset-value .unit {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+.asset-value.pos { color: var(--color-income); }
+.asset-value.neg { color: var(--color-expense); }
+
+.asset-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.nav-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.nav-btn.budget { color: var(--color-income); border-top: 3px solid var(--color-income); }
+.nav-btn.invest { color: var(--color-invest); border-top: 3px solid var(--color-invest); }
+
+.nav-icon { font-size: 28px; }
+
+/* Debt hover card */
+.debt-hover-card {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(100% - 28px));
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: stretch;
+  z-index: 100;
+}
+
+.debt-hover-card:hover {
+  transform: translateY(-50%) translateX(0);
+}
+
+.debt-tab {
+  writing-mode: vertical-lr;
+  background: var(--color-expense);
+  color: white;
+  padding: 14px 7px;
+  border-radius: 8px 0 0 8px;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+}
+
+.debt-card-content {
+  background: white;
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  box-shadow: -4px 0 16px rgba(0,0,0,0.1);
+  width: 280px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.debt-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.debt-month-row {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.debt-month-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.1s;
+  border-radius: 4px;
+}
+
+.debt-month-header:hover { background: var(--bg-hover); }
+.debt-month-header.expanded { font-weight: 600; }
+
+.debt-month-total {
+  flex: 1;
+  text-align: right;
+  color: var(--color-expense);
+  font-size: 13px;
+}
+
+.debt-month-items {
+  padding: 6px 4px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.debt-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.debt-item-name {
+  flex: 1;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.debt-amount-input {
+  width: 90px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 13px;
+}
+
+.add-debt-btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px dashed var(--color-expense);
+  background: white;
+  color: var(--color-expense);
+  cursor: pointer;
+  font-size: 12px;
+  width: 100%;
+}
+
+.del-btn {
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--color-expense);
+  background: white;
+  color: var(--color-expense);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1;
+}
