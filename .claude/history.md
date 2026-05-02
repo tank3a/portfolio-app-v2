@@ -104,3 +104,4 @@ Summary:
 
 If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/jwk/.claude/projects/-Users-jwk-Documents-asset-manager-v2/0ab54905-e333-4ffb-9be6-957906cfa458.jsonl
 Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
+- **2026-05-02 18:24**: 어플리케이션의 오른쪽 상단에 도움말 아이콘을 두고, 누르면 도움말을 표시하고 싶다. 도움말은 help.md파일에 관리해두고 아이콘 클릭시 내용을 보여주면 된다. 그리고 도움말에는 지금 이 어플리케이션에서 할 수 있는 내용들을 적어라(편집 버튼의 기능 등등)

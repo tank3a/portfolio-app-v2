@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useFileData } from './hooks/useFileData'
 import MainPage from './pages/MainPage'
@@ -5,10 +6,13 @@ import BudgetMainPage from './pages/BudgetMainPage'
 import BudgetDetailPage from './pages/BudgetDetailPage'
 import InvestMainPage from './pages/InvestMainPage'
 import InvestDetailPage from './pages/InvestDetailPage'
+import HelpModal from './components/HelpModal'
 import './App.css'
+import './components/HelpModal.css'
 
 export default function App() {
   const { data, updateData, fileReady, isLoading, openFile, createFile, requestPermission } = useFileData()
+  const [showHelp, setShowHelp] = useState(false)
 
   if (isLoading) {
     return (
@@ -49,6 +53,8 @@ export default function App() {
         <Route path="/invest" element={<InvestMainPage data={data} updateData={updateData} />} />
         <Route path="/invest/:month" element={<InvestDetailPage data={data} updateData={updateData} />} />
       </Routes>
+      <button className="help-btn" onClick={() => setShowHelp(true)}>?</button>
+      {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
     </BrowserRouter>
   )
 }
