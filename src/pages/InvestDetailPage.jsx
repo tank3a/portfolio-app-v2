@@ -66,8 +66,10 @@ export default function InvestDetailPage({ data, updateData }) {
     updateData(prev => {
       const d = JSON.parse(JSON.stringify(prev))
       const ensured = d.investment?.[year]?.[String(m)] ? d : ensureInvestMonth(d, year, m)
-      const arr = ensured.investment[year][String(m)]?.[topCat]?.[subCat]
-      if (arr) arr.push(isStock ? { name: name.trim(), amount: 0, deposit: 0 } : { name: name.trim(), amount: 0 })
+      const im = ensured.investment[year][String(m)]
+      if (!im[topCat]) im[topCat] = {}
+      if (!im[topCat][subCat]) im[topCat][subCat] = []
+      im[topCat][subCat].push(isStock ? { name: name.trim(), amount: 0, deposit: 0 } : { name: name.trim(), amount: 0 })
       return ensured
     })
   }

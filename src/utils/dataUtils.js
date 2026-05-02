@@ -162,8 +162,9 @@ export function addInvestSubCategory(data, year, fromMonth, topCat, name) {
   }
   for (let m = Number(fromMonth); m <= 12; m++) {
     const im = d.investment?.[year]?.[String(m)]
-    if (im && im[topCat] && !im[topCat][name]) {
-      im[topCat][name] = []
+    if (im) {
+      if (!im[topCat]) im[topCat] = {}
+      if (!im[topCat][name]) im[topCat][name] = []
     }
   }
   return d
