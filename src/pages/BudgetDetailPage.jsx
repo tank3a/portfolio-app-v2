@@ -59,7 +59,14 @@ export default function BudgetDetailPage({ data, updateData }) {
   function handleAddRegular() {
     const name = window.prompt('정기수입 항목명을 입력하세요')
     if (!name?.trim()) return
-    updateData(prev => addRegularIncomeItem(prev, year, m, name.trim()))
+    const alreadyExists = Object.values(data.budget?.[year] || {}).some(
+      mo => (mo.regularIncome || []).some(i => i.name === name.trim())
+    )
+    if (alreadyExists) {
+      window.alert(`"${name.trim()}" 항목이 이미 존재합니다.`)
+      return
+    }
+    updateData(prev => addRegularIncomeItem(prev, year, 1, name.trim()))
   }
 
   function handleRemoveRegular(name) {
@@ -70,6 +77,10 @@ export default function BudgetDetailPage({ data, updateData }) {
   function handleAddIrregular() {
     const name = window.prompt('비정기수입 항목명을 입력하세요')
     if (!name?.trim()) return
+    if ((bm.irregularIncome || []).some(i => i.name === name.trim())) {
+      window.alert(`"${name.trim()}" 항목이 이미 존재합니다.`)
+      return
+    }
     updateData(prev => {
       const d = JSON.parse(JSON.stringify(prev))
       const ensured = d.budget?.[year]?.[String(m)] ? d : ensureBudgetMonth(d, year, m)
@@ -90,6 +101,10 @@ export default function BudgetDetailPage({ data, updateData }) {
   function handleAddCategory() {
     const name = window.prompt('지출 카테고리명을 입력하세요')
     if (!name?.trim()) return
+    if ((data.expenseCategories || []).includes(name.trim())) {
+      window.alert(`"${name.trim()}" 카테고리가 이미 존재합니다.`)
+      return
+    }
     updateData(prev => addExpenseCategory(prev, name.trim()))
   }
 
@@ -101,6 +116,10 @@ export default function BudgetDetailPage({ data, updateData }) {
   function handleAddExpenseItem(cat) {
     const name = window.prompt(`"${cat}" 카테고리에 항목명을 입력하세요`)
     if (!name?.trim()) return
+    if ((bm.expenses?.[cat] || []).some(i => i.name === name.trim())) {
+      window.alert(`"${name.trim()}" 항목이 이미 존재합니다.`)
+      return
+    }
     updateData(prev => {
       const d = JSON.parse(JSON.stringify(prev))
       const ensured = d.budget?.[year]?.[String(m)] ? d : ensureBudgetMonth(d, year, m)

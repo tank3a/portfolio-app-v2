@@ -22,11 +22,13 @@
 
 ```
 src/
-├── App.jsx                        # 라우터 + 파일 로더 게이트
+├── App.jsx                        # 라우터 + 파일 로더 게이트 + 전역 도움말 버튼
 ├── App.css                        # 파일 로더 화면 스타일
+├── help.md                        # 도움말 내용 (마크다운, ?버튼 클릭 시 표시)
 ├── main.jsx
 ├── index.css                      # CSS 변수 및 전역 스타일
 ├── components/
+│   ├── HelpModal.jsx/.css         # 전역 도움말 모달 (? 버튼, position:fixed)
 │   ├── HoverMonthCard.jsx/.css    # 우측 슬라이드 월 선택 카드 (공통)
 │   ├── UnitSelector.jsx/.css      # 원/천/만 단위 토글 (공통)
 │   ├── MonthlyTable.jsx/.css      # 1~12월 통계 표 (공통)
@@ -131,7 +133,7 @@ src/
 
 | 동작 | 범위 |
 |---|---|
-| 정기수입 항목 추가 (M월) | M~12월에 항목 생성 (기존 금액 유지, 신규 월은 0) |
+| 정기수입 항목 추가 (M월) | 1~12월 전체 월에 항목 생성 (기존 금액 유지, 신규 월은 0) |
 | 정기수입 항목 삭제 (M월) | M~12월에서 항목 제거 + window.confirm |
 | 지출 카테고리 추가 | 전체 월에 반영 (전역) |
 | 지출 카테고리 삭제 | 전체 월에서 제거 + window.confirm |
@@ -161,6 +163,16 @@ src/
 - `HoverMonthCard`: CSS `transform: translateX(calc(100% - 24px))` → hover 시 `translateX(0)`. 우측 고정 슬라이드.
 - `MonthlyTable`: rows 배열 `{label, values: {1..12}}` 를 props로 받음. 직접 수정 불가 (read-only).
 - `MonthlyLineChart`: `series: [{name, data: {1..12}}]` 를 props로 받음.
+- `HelpModal`: `src/help.md`를 `?raw` Vite 임포트로 번들에 포함. 마크다운을 JSX로 직접 파싱 렌더링. `App.jsx`에서 `position:fixed` `?` 버튼으로 전역 표시.
+
+### BrowserRouter basename
+- GitHub Pages 배포 시 `/portfolio-app-v2/` 경로 처리를 위해 `basename={import.meta.env.BASE_URL}` 사용.
+- `vite.config.js`의 `base: '/portfolio-app-v2/'` 와 연동. 로컬(`/`)과 배포 환경 모두 자동 대응.
+
+### 투자 상세 페이지 카테고리 표시
+- `InvestDetailPage`에서 표시할 `topCats`는 전역 `investTopCategories`가 아닌 해당 월 데이터 `Object.keys(im)`에서 파생.
+- `subCats`도 `Object.keys(im[topCat] || {})`에서 파생.
+- 이로써 카테고리 삭제(M월~)가 이전 달 데이터에 영향 없음. `investTopCategories`는 메인 페이지 집계에만 사용.
 
 ## 기능 요구사항
 

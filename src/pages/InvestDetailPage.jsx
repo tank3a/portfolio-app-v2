@@ -62,6 +62,10 @@ export default function InvestDetailPage({ data, updateData }) {
   function handleAddItem(topCat, subCat) {
     const name = window.prompt(`"${subCat}" 항목명을 입력하세요`)
     if (!name?.trim()) return
+    if ((im?.[topCat]?.[subCat] || []).some(i => i.name === name.trim())) {
+      window.alert(`"${name.trim()}" 항목이 이미 존재합니다.`)
+      return
+    }
     const isStock = topCat === '주식'
     updateData(prev => {
       const d = JSON.parse(JSON.stringify(prev))
@@ -89,6 +93,10 @@ export default function InvestDetailPage({ data, updateData }) {
   function handleAddSubCat(topCat) {
     const name = window.prompt(`"${topCat}"의 하위 카테고리명을 입력하세요`)
     if (!name?.trim()) return
+    if ((data.investSubCategories?.[topCat] || []).includes(name.trim())) {
+      window.alert(`"${name.trim()}" 카테고리가 이미 존재합니다.`)
+      return
+    }
     updateData(prev => addInvestSubCategory(prev, year, m, topCat, name.trim()))
   }
 
@@ -100,6 +108,10 @@ export default function InvestDetailPage({ data, updateData }) {
   function handleAddTopCat() {
     const name = window.prompt('새 투자 카테고리명을 입력하세요')
     if (!name?.trim()) return
+    if ((data.investTopCategories || []).includes(name.trim())) {
+      window.alert(`"${name.trim()}" 카테고리가 이미 존재합니다.`)
+      return
+    }
     updateData(prev => addInvestTopCategory(prev, year, m, name.trim()))
   }
 

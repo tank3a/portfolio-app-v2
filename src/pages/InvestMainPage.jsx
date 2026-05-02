@@ -58,6 +58,10 @@ export default function InvestMainPage({ data, updateData }) {
   function handleAddCategory() {
     const name = window.prompt('새 투자 카테고리명을 입력하세요')
     if (!name?.trim()) return
+    if (topCats.includes(name.trim())) {
+      window.alert(`"${name.trim()}" 카테고리가 이미 존재합니다.`)
+      return
+    }
     const currentMonth = new Date().getMonth() + 1
     updateData(prev => addInvestTopCategory(prev, year, currentMonth, name.trim()))
   }
