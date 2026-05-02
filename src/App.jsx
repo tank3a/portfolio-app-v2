@@ -45,7 +45,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<MainPage data={data} updateData={updateData} />} />
         <Route path="/budget" element={<BudgetMainPage data={data} updateData={updateData} />} />
