@@ -218,6 +218,7 @@ export default function InvestDetailPage({ data, updateData }) {
                               className="amount-input small"
                               value={item.deposit || 0}
                               unit={unit}
+                              allowNegative
                               onChange={val => setItemDeposit(topCat, subCat, item.name, val)}
                             />
                             {change !== null && (

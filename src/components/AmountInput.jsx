@@ -6,7 +6,7 @@ function toDisplayValue(rawValue, unit) {
   return Math.round((rawValue || 0) / divisor)
 }
 
-export default function AmountInput({ value, unit, onChange, className }) {
+export default function AmountInput({ value, unit, onChange, className, allowNegative = false }) {
   const [focused, setFocused] = useState(false)
   const [editText, setEditText] = useState('')
 
@@ -23,7 +23,15 @@ export default function AmountInput({ value, unit, onChange, className }) {
   }
 
   function handleChange(e) {
-    setEditText(e.target.value.replace(/[^0-9]/g, ''))
+    const val = e.target.value
+    if (allowNegative) {
+      const cleaned = val.startsWith('-')
+        ? '-' + val.slice(1).replace(/[^0-9]/g, '')
+        : val.replace(/[^0-9]/g, '')
+      setEditText(cleaned)
+    } else {
+      setEditText(val.replace(/[^0-9]/g, ''))
+    }
   }
 
   const displayStr = focused
